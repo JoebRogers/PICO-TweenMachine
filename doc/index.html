@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Scripts</h2>
+<ul class="nowrap">
+  <li><strong>PICO-TweenMachine</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Script <code>PICO-TweenMachine</code></h1>
+<p>PICO-TweenMachine -
+ An additional small extension
+ library for PICO-Tween that
+ acts as a wrapper, powering
+ all tween related functionality
+ internally, rather than having
+ large chunks of tweening
+ cluttering the codebase.</p>
+<p></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: Joeb Rogers 2018</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: Joeb Rogers</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#tween_machine:update">tween_machine:update ()</a></td>
+	<td class="summary">Calls update() on all current
+ tween instances.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#tween_machine:add_tween">tween_machine:add_tween (instance)</a></td>
+	<td class="summary">Adds a created tween instance to
+ the table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:register_step_callback">__tween:register_step_callback (func)</a></td>
+	<td class="summary">Registers the passed in function
+ as a step callback, to be called
+ in update() after a new value has
+ been set.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:register_finished_callback">__tween:register_finished_callback (func)</a></td>
+	<td class="summary">Registers the passed in function
+ as a finished callback, to be
+ called at the end of update()
+ after the tween has been marked
+ as finished.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:init">__tween:init ()</a></td>
+	<td class="summary">Sets the tween's necessary
+ fields prior to being
+ ran.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:restart">__tween:restart ()</a></td>
+	<td class="summary">Restarts the tween's
+ necessary fields in order to be
+ ran again.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:update">__tween:update ()</a></td>
+	<td class="summary">Updates the tween object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween:remove">__tween:remove ()</a></td>
+	<td class="summary">Removes the tween from the
+ wrapper object.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#tween_machine">tween_machine</a></td>
+	<td class="summary">The main wrapper object
+ of the library.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#__tween">__tween</a></td>
+	<td class="summary">The base table for all tween
+ objects.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "tween_machine:update"></a>
+    <strong>tween_machine:update ()</strong>
+    </dt>
+    <dd>
+    Calls update() on all current
+ tween instances.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tween_machine:add_tween"></a>
+    <strong>tween_machine:add_tween (instance)</strong>
+    </dt>
+    <dd>
+    Adds a created tween instance to
+ the table.  The passed in object only
+ needs to define the fields it needs
+ to change, the rest will be defaulted
+ to the base tween object.
+ For example:
+ tween_machine:add_tween({
+ func = linear,
+ v_start = 10,
+ v_end = 5
+ })
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">instance</span>
+         The tween object to add
+ to the machine.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the tween object.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:register_step_callback"></a>
+    <strong>__tween:register_step_callback (func)</strong>
+    </dt>
+    <dd>
+    Registers the passed in function
+ as a step callback, to be called
+ in update() after a new value has
+ been set.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to be
+ called every step.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:register_finished_callback"></a>
+    <strong>__tween:register_finished_callback (func)</strong>
+    </dt>
+    <dd>
+    Registers the passed in function
+ as a finished callback, to be
+ called at the end of update()
+ after the tween has been marked
+ as finished.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to be
+ called when finished.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:init"></a>
+    <strong>__tween:init ()</strong>
+    </dt>
+    <dd>
+    Sets the tween's necessary
+ fields prior to being
+ ran.
+ Called automatically when
+ added to the wrapper object
+ or when restarted.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:restart"></a>
+    <strong>__tween:restart ()</strong>
+    </dt>
+    <dd>
+    Restarts the tween's
+ necessary fields in order to be
+ ran again.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:update"></a>
+    <strong>__tween:update ()</strong>
+    </dt>
+    <dd>
+    Updates the tween object.
+ Gets the current value for the
+ tween from the set function and
+ will pass it through all the
+ registered step callbacks.
+ Will set the tween as finished
+ when the elapsed time passes
+ the duration and will pass
+ the tween object to all
+ registered finished callback
+ functions.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+         Will return early if
+ the tween is finished or no
+ easing function has been set.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween:remove"></a>
+    <strong>__tween:remove ()</strong>
+    </dt>
+    <dd>
+    Removes the tween from the
+ wrapper object.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "tween_machine"></a>
+    <strong>tween_machine</strong>
+    </dt>
+    <dd>
+    The main wrapper object
+ of the library.
+ Stores all curent instances
+ of tween objects and drives
+ them.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">instances</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "__tween"></a>
+    <strong>__tween</strong>
+    </dt>
+    <dd>
+    The base table for all tween
+ objects.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The easing function
+ to use for this tween.
+        </li>
+        <li><span class="parameter">v_start</span>
+         The starting value
+ for the tween.
+        </li>
+        <li><span class="parameter">v_end</span>
+         The end value of the
+ tween.
+        </li>
+        <li><span class="parameter">value</span>
+         The value between
+ v_start and v_end representing
+ the current tween progress.
+        </li>
+        <li><span class="parameter">start_time</span>
+         The time at which
+ the tween was started, set in init()
+ via the time() function.
+        </li>
+        <li><span class="parameter">duration</span>
+         The duration of time
+ the tween should last for.
+        </li>
+        <li><span class="parameter">elapsed</span>
+         The amount of time
+ elapsed since the tween was started.
+        </li>
+        <li><span class="parameter">finished</span>
+         A bool for whether
+ or not the tween has finished
+ running.
+        </li>
+        <li><span class="parameter">step_callbacks</span>
+         A table of
+ registered callback functions.
+ Called in update() after a new
+ value has been set.
+ Will call all registered functions
+ with value as the argument.
+        </li>
+        <li><span class="parameter">finished_callbacks</span>
+         A table
+ of registered callback functions.
+ Called at the end of update()
+ after the tween has been marked
+ as finished.
+ Will call all registered functions
+ with self as the argument.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2018-05-06 00:17:25 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
