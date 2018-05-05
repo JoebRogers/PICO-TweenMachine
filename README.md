@@ -1,1 +1,1 @@
-PICO-TweenMachine
+![PICO-TweenMachine](img/logo.gif)
