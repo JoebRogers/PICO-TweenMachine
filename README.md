@@ -21,6 +21,8 @@ If you'd like to use the library as intended, then grab it from the [PICO-Tween]
 
 After copying over the sources to your cart, using a tween with the library is very simple. You simply need to call the `tween_machine:add_tween` function, passing the fields you'd like to set as an object. The add tween function also returns an instance of the tween, which should be stored somewhere in order to remove it from the wrapper at any point, or for polling the current value of the tween. Any code that you want to call during each step of the tween or after the tween has finished running can be registered as callbacks with the `__tween:register_step_callbacks` and `__tween:register_finished_callbacks` functions.
 
+Following this, all you need to do is add: `tween_machine:update()` to your `_update()` function.
+
 Here's a small example showing how this can be used in action (assuming the wrapper has been pasted to the top of the cart):
 
 ```lua 
