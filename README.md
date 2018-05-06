@@ -15,7 +15,7 @@ into the top of your code (I recommend the top in order to avoid problems with o
 
 If you plan on using your own tweening code, then simply follow the examples provided for setting up tweens in the **Basic Usage** section.
 
-If you'd like to use the library as intended, then grab it from the [PICO-Tween](https://github.com/JoebRogers/PICO-Tween) repository and follow the setup advice there for functions to grab for your usage.
+If you'd like to use the library as intended, then grab the easing functions from the [PICO-Tween](https://github.com/JoebRogers/PICO-Tween) repository and follow the setup advice there for functions to grab for your usage.
 
 ## Basic Usage
 
