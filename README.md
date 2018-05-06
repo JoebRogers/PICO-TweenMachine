@@ -77,3 +77,7 @@ Here are some example gifs:
 ![Bounce Out](img/bounce-out.gif)
 
 ![Out In Cubic](img/in-out-circ.gif)
+
+## Reference
+
+The API documentation for the library can be viewed [here](https://joebrogers.github.io/pico-tween-machine/).
