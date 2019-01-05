@@ -88,4 +88,4 @@ Here are some example gifs:
 
 ## Reference
 
-The API documentation for the library can be viewed [here](https://joebrogers.github.io/pico-tween-machine/).
+The API documentation for the library can be viewed [here](https://joebrogers.com/Libraries/PICO-Tween-Machine/API/1.0/).
