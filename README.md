@@ -4,9 +4,27 @@
 
 The original library simply provided a collection of tweening/easing functions, and their math dependencies for use in your code. This extension exists as a lightweight wrapper to drive all tween related code in clean and clear manner, reducing the boilerplate and mess nestled within your codebase. 
 
-This library currently sits at **239** tokens, not including any actual tweening/easing functions.
+This library currently sits at **277** tokens, not including any actual tweening/easing functions.
 
 Whilst the intent for this library is as an extension to my own port of tweening functions for the **PICO-8**, it is completely dependency free, and will be completely compatible with any of your own tweening functions provided that they take arguments in the same way as traditional **Robert Penner** styled tweens.
+
+## Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on Keep a Changelog and this project adheres to Semantic Versioning.
+
+### [1.0.1] - 12/06/2020
+
+#### Added
+
+An additional pair of utility functions, `utilities:assign` and `utilities:deep_assign`, which provide functionality for both shallow and deep copying fields in bulk from one (or more) source tables to a specified target table. These are the same functions as currently used in [PICO_EC](https://github.com/JoebRogers/PICO-EC), so if you also happen to be using that repo, you should remove one set of the functions to avoid conflicts.
+
+#### Changed
+
+* [Tween instances interfering with each other](https://github.com/JoebRogers/PICO-Tween/issues/2)
+
+Adjusted the way tween instances are constructed in the factory function `tween_machine:add_tween`. The base `__tween` class no longer has it's properties declared in the global scope, and are instead constructed in an anonymous table within the add function. The reason for this, is the current method allows for non-declared fields within the `instance` parameter to write directly to the backing table, rather than a version of the field local to the created tween instance. This causes conflicts between tween instances when more than one are improperly declared. The new construction method should remove this issue without causing users to have to declare more fields than they want to overwrite from the default values, wasting tokens.
 
 ## Setup
 

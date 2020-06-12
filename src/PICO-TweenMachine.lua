@@ -13,6 +13,84 @@
 -- @license MIT
 -- @copyright Joeb Rogers 2018
 
+--- A table storing various utility
+-- functions used by the ECS.
+utilities = {}
+
+--- Assigns the contents of a table to another.
+-- Copy over the keys and values from source 
+-- tables to a target. Assign only shallow copies
+-- to the target table. For a deep copy, use
+-- deep_assign instead.
+-- @param target The table to be copied to.
+-- @param source Either a table to copy from,
+-- or an array storing multiple source tables.
+-- @param multiple Specifies whether source contains
+-- more than one table.
+-- @return The target table with overwritten and 
+-- appended values.
+function utilities.assign(target, source, multiple)
+  multiple = multiple or false
+  if multiple == true then
+    for count = 1, #source do
+      target = utilities.assign(target, source[count])
+    end
+    return target
+  else
+    for k, v in pairs(source) do
+      target[k] = v;
+    end
+  end
+  return target;
+end
+
+--- Deep assigns the contents of a table to another.
+-- Copy over the keys and values from source 
+-- tables to a target. Will recurse through child
+-- tables to copy over their keys/values as well.
+-- @param target The table to be copied to.
+-- @param source Either a table to copy from,
+-- or an array storing multiple source tables.
+-- @param multipleSource Specifies whether source
+-- contains more than one table.
+-- @param exclude Either a string or an array of
+-- string containing keys to exclude from copying.
+-- @param multipleExclude Specifies whether exclude
+-- contains more than one string.
+-- @return The target table with overwritten and 
+-- appended values.
+function utilities.deep_assign(target, source, multipleSource, exclude, multipleExclude)
+    multipleSource = multipleSource or false
+    exclude = exclude or nil
+    multipleExclude = multipleExclude or false
+
+    if multipleSource then
+        for count = 1, #source do
+            target = utilities.deep_assign(target, source[count], false, exclude, multipleExclude)
+        end
+        return target
+    else
+        for k, v in pairs(source) do
+            local match = false
+            if multipleExclude then
+                for count = 1, #exclude do
+                    if (k == exclude[count]) match = true
+                end
+            elseif exclude then
+                if (k == exclude) match = true
+            end
+            if not match then
+                if type(v) == "table" then
+                    target[k] = utilities.deep_assign({}, v, false, exclude, multipleExclude)
+                else
+                    target[k] = v;
+                end
+            end
+        end
+    end
+    return target;
+end
+
 --- The main wrapper object
 -- of the library. 
 -- Stores all curent instances
@@ -45,10 +123,30 @@ end
 -- to the machine.
 -- @return Returns the tween object.
 function tween_machine:add_tween(instance)
-    setmetatable(instance, {__index = __tween})
-    add(self.instances, instance)
-    instance:init()
-    return instance
+    local this = 
+    {
+        func = nil,
+        v_start = 0,
+        v_end = 1,
+        value = 0,
+        start_time = 0,
+        duration = 0,
+        elapsed = 0,
+        finished = false,
+    
+        --- Callbacks
+        -- Will pass through value
+        -- as argument.
+        step_callbacks = {},
+        -- Will pass through tween
+        -- object as argument.
+        finished_callbacks = {}
+    }
+    utilities.deep_assign(this, instance)
+    setmetatable(this, __tween)
+    add(self.instances, this)
+    this:init()
+    return this
 end
 
 --- The base table for all tween
@@ -85,24 +183,8 @@ end
 -- as finished.
 -- Will call all registered functions
 -- with self as the argument.
-__tween = {
-    func = nil,
-    v_start = 0,
-    v_end = 1,
-    value = 0,
-    start_time = 0,
-    duration = 0,
-    elapsed = 0,
-    finished = false,
-
-    --- Callbacks
-    -- Will pass through value
-    -- as argument.
-    step_callbacks = {},
-    -- Will pass through tween
-    -- object as argument.
-    finished_callbacks = {}
-}
+__tween = {}
+__tween.__index = __tween
 
 --- Registers the passed in function
 -- as a step callback, to be called
